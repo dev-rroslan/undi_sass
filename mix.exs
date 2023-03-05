@@ -62,7 +62,7 @@ defmodule Undi.MixProject do
       {:bcrypt_elixir, "~> 3.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:oban, "~> 2.14.1"},
-      {:phoenix_swoosh, "~> 1.1.0"},
+      {:phoenix_swoosh, "~> 1.2.0"},
       {:premailex, "~> 0.3.1"},
       {:saas_kit, "~> 0.4.0"},
       {:number, "~> 1.0"},
