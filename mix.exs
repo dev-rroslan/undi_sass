@@ -57,7 +57,7 @@ defmodule Undi.MixProject do
       # ADDITIONAL PACKAGES
       {:cachex, "~> 3.6.0"},
       {:flop, "~> 0.19.0"},
-      {:flop_phoenix, "~> 0.17.2"},
+      {:flop_phoenix, "~> 0.18.0"},
       {:guardian, "~> 2.3"},
       {:bcrypt_elixir, "~> 3.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
