@@ -53,6 +53,7 @@ if config_env() == :prod do
 
   config :undi, UndiWeb.Endpoint,
     url: [host: host, port: 443, scheme: "https"],
+    check_origin: ["https://undi.online", "https://undi.fly.dev"],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
@@ -62,6 +63,23 @@ if config_env() == :prod do
       port: port
     ],
     secret_key_base: secret_key_base
+
+    app_name =
+      System.get_env("FLY_APP_NAME") ||
+        raise "FLY_APP_NAME not available"
+
+    config :libcluster,
+      debug: true,
+      topologies: [
+        fly6pn: [
+          strategy: Cluster.Strategy.DNSPoll,
+          config: [
+            polling_interval: 5_000,
+            query: "#{app_name}.internal",
+            node_basename: app_name
+          ]
+        ]
+      ]
 
   # ## Configuring the mailer
   #
