@@ -48,10 +48,15 @@ config :undi, UndiWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :undi, Undi.Mailer, adapter: Swoosh.Adapters.Local
-
-# Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, false
+config :undi, Undi.Mailer,
+    adapter: Swoosh.Adapters.Sendgrid,
+    api_key: System.get_env("SENDGRID_API_KEY")
+  #       domain: System.get_env("MAILGUN_DOMAIN")
+  #
+  # For this example you need include a HTTP client required by Swoosh API client.
+  # Swoosh supports Hackney and Finch out of the box:
+  #
+  config :swoosh, :api_client, Swoosh.ApiClient.Finch
 
 # Configure esbuild (the version is required)
 config :esbuild,

@@ -19,6 +19,7 @@ defmodule Undi.Application do
       UndiWeb.Endpoint,
       # Start a worker by calling: Undi.Worker.start_link(arg)
       # {Undi.Worker, arg}
+      {Finch, name: Swoosh.Finch},
       {Oban, oban_config()},
       {Cachex, name: :general_cache}, # You can add additional caches with different names
       {Cluster.Supervisor, [topologies, [name: Undi.ClusterSupervisor]]}
