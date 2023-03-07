@@ -10,8 +10,16 @@ defmodule Undi.MixProject do
       compilers: [] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
-    ]
+      deps: deps(),
+      releases: [
+        undi: [
+          include_executables_for: [:unix],
+          applications: [runtime_tools: :permanent],
+          cookie: "y9kF2u644cRZCtR0aRWU3DbVYYfiw0sn6E6y_L_3K_qTY8TXezTyow=="
+        ],
+
+        ]
+     ]
   end
 
   # Configuration for the OTP application.
