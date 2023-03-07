@@ -17,7 +17,7 @@ config :undi, Undi.Repo,
   migration_primary_key: [name: :id, type: :binary_id]
 
 config :undi,
-  require_user_confirmation: false,
+  require_user_confirmation: true,
   app_name: "Undi",
   page_url: "undi.online",
   company_name: "Undi Enterprise",
