@@ -18,14 +18,14 @@ defmodule UndiWeb.LayoutComponents do
       class={[
         "btn btn-link text-base-content"
       ]}>Log in</.link>
-
+<!--
     <.link
       :if={!@current_user}
       href={~p"/users/register"}
       class={[
         "btn btn-primary"
       ]}>Register</.link>
-
+-->
     <.link :if={@current_user} href={~p"/users/settings"} class="w-full btn btn-link text-base-content">Settings</.link>
     <.link :if={@current_user} href={~p"/accounts"} class="w-full btn btn-link text-base-content">Accounts</.link>
     <.link :if={@current_user} href={~p"/users/log_out"} method="delete" class="w-full btn btn-link text-base-content">Log out</.link>
@@ -41,13 +41,15 @@ defmodule UndiWeb.LayoutComponents do
         "btn btn-link text-base-content"
       ]}>Log in</.link>
 
+
+<!--
     <.link
       :if={!@current_user}
       href={~p"/users/register"}
       class={[
         "btn btn-primary"
       ]}>Register</.link>
-
+-->
     <.dropdown :if={@current_user} id={"user-menu#{if @mobile, do: "-mobile"}"}>
       <:toggle class="px-2 btn btn-secondary">
         <Heroicons.user_circle solid class="w-8 h-8" />
