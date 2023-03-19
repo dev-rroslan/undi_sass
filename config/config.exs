@@ -13,8 +13,7 @@ config :undi,
   ecto_repos: [Undi.Repo],
   generators: [binary_id: true]
 
-config :undi, Undi.Repo,
-  migration_primary_key: [name: :id, type: :binary_id]
+config :undi, Undi.Repo, migration_primary_key: [name: :id, type: :binary_id]
 
 config :undi,
   require_user_confirmation: true,
@@ -48,15 +47,17 @@ config :undi, UndiWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :undi, Undi.Mailer,
-    adapter: Swoosh.Adapters.Sendgrid,
-    api_key: System.get_env("SENDGRID_API_KEY")
-  #       domain: System.get_env("MAILGUN_DOMAIN")
-  #
-  # For this example you need include a HTTP client required by Swoosh API client.
-  # Swoosh supports Hackney and Finch out of the box:
-  #
-  config :swoosh, :api_client, Swoosh.ApiClient.Finch
+# config :undi, Undi.Mailer,
+# adapter: Swoosh.Adapters.Sendinblue,
+# api_key: System.get_env("SENDINBLUE_API_KEY")
+
+config :undi, Undi.Mailer, adapter: Swoosh.Adapters.Local
+#       domain: System.get_env("MAILGUN_DOMAIN")
+#
+# For this example you need include a HTTP client required by Swoosh API client.
+# Swoosh supports Hackney and Finch out of the box:
+#
+config :swoosh, :api_client, Swoosh.ApiClient.Finch
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -68,7 +69,7 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
-  config :tailwind,
+config :tailwind,
   version: "3.2.4",
   default: [
     args: ~w(
@@ -96,15 +97,17 @@ config :phoenix, :json_library, Jason
 
 config :undi, Undi.Admins.Guardian,
   issuer: "undi",
-  secret_key: System.get_env("GUARDIAN_SECRET_KEY_ADMINS") || "fG5Yl61b37W+aG/RLDY5GdWhMveGi0wySTmAMy69muI4KLXSEOZ0Y3s0GrBqyyBV"
+  secret_key:
+    System.get_env("GUARDIAN_SECRET_KEY_ADMINS") ||
+      "fG5Yl61b37W+aG/RLDY5GdWhMveGi0wySTmAMy69muI4KLXSEOZ0Y3s0GrBqyyBV"
 
 config :undi, Oban,
   repo: Undi.Repo,
   queues: [default: 10, mailers: 20, high: 50, low: 5],
   plugins: [
-    {Oban.Plugins.Pruner, max_age: (3600 * 24)},
+    {Oban.Plugins.Pruner, max_age: 3600 * 24},
     {Oban.Plugins.Cron,
-      crontab: [
+     crontab: [
        # {"0 2 * * *", Undi.Workers.DailyDigestWorker},
        # {"@reboot", Undi.Workers.StripeSyncWorker}
      ]}
@@ -113,6 +116,7 @@ config :undi, Oban,
 config :saas_kit,
   admin: true,
   api_key: System.get_env("SAAS_KIT_API_KEY")
+
 config :flop, repo: Undi.Repo
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

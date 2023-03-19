@@ -64,22 +64,22 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-    app_name =
-      System.get_env("FLY_APP_NAME") ||
-        raise "FLY_APP_NAME not available"
+  app_name =
+    System.get_env("FLY_APP_NAME") ||
+      raise "FLY_APP_NAME not available"
 
-    config :libcluster,
-      debug: true,
-      topologies: [
-        fly6pn: [
-          strategy: Cluster.Strategy.DNSPoll,
-          config: [
-            polling_interval: 5_000,
-            query: "#{app_name}.internal",
-            node_basename: app_name
-          ]
+  config :libcluster,
+    debug: true,
+    topologies: [
+      fly6pn: [
+        strategy: Cluster.Strategy.DNSPoll,
+        config: [
+          polling_interval: 5_000,
+          query: "#{app_name}.internal",
+          node_basename: app_name
         ]
       ]
+    ]
 
   # ## Configuring the mailer
   #
@@ -88,8 +88,9 @@ if config_env() == :prod do
   # are not using SMTP. Here is an example of the configuration:
   #
   config :undi, Undi.Mailer,
-    adapter: Swoosh.Adapters.Sendgrid,
-    api_key: System.get_env("SENDGRID_API_KEY")
+    adapter: Swoosh.Adapters.Sendinblue,
+    api_key: System.get_env("SENDINBLUE_API_KEY")
+
   #       domain: System.get_env("MAILGUN_DOMAIN")
   #
   # For this example you need include a HTTP client required by Swoosh API client.
