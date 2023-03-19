@@ -7,15 +7,22 @@ defmodule UndiWeb.UserConfirmationInstructionsLive do
     ~H"""
     <.header class="text-center">Resend confirmation instructions</.header>
 
-    <.simple_form :let={f} for={%{}} as={:user} id="resend_confirmation_form" phx-submit="send_instructions">
+    <.simple_form
+      :let={f}
+      for={%{}}
+      as={:user}
+      id="resend_confirmation_form"
+      phx-submit="send_instructions"
+    >
       <.input field={{f, :email}} type="email" label="Email" required />
       <:actions>
-        <.button class="w-full" phx-disable-with="Sending...">Resend confirmation instructions</.button>
+        <.button class="w-full" phx-disable-with="Sending...">
+          Resend confirmation instructions
+        </.button>
       </:actions>
     </.simple_form>
 
     <p class="text-center">
-      <.link href={~p"/users/register"}>Register</.link>
       |
       <.link href={~p"/users/log_in"}>Log in</.link>
     </p>

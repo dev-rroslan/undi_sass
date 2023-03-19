@@ -10,6 +10,7 @@ defmodule UndiWeb.LayoutComponents do
 
   attr :mobile, :boolean, default: false
   attr :current_user, :any
+
   def user_menu(%{mobile: true} = assigns) do
     ~H"""
     <.link
@@ -17,18 +18,29 @@ defmodule UndiWeb.LayoutComponents do
       href={~p"/users/log_in"}
       class={[
         "btn btn-link text-base-content"
-      ]}>Log in</.link>
+      ]}
+    >
+      Log in
+    </.link>
 
     <.link
-      :if={!@current_user}
-      href={~p"/users/register"}
-      class={[
-        "btn btn-primary"
-      ]}>Register</.link>
-
-    <.link :if={@current_user} href={~p"/users/settings"} class="w-full btn btn-link text-base-content">Settings</.link>
-    <.link :if={@current_user} href={~p"/accounts"} class="w-full btn btn-link text-base-content">Accounts</.link>
-    <.link :if={@current_user} href={~p"/users/log_out"} method="delete" class="w-full btn btn-link text-base-content">Log out</.link>
+      :if={@current_user}
+      href={~p"/users/settings"}
+      class="w-full btn btn-link text-base-content"
+    >
+      Settings
+    </.link>
+    <.link :if={@current_user} href={~p"/accounts"} class="w-full btn btn-link text-base-content">
+      Accounts
+    </.link>
+    <.link
+      :if={@current_user}
+      href={~p"/users/log_out"}
+      method="delete"
+      class="w-full btn btn-link text-base-content"
+    >
+      Log out
+    </.link>
     """
   end
 
@@ -39,23 +51,25 @@ defmodule UndiWeb.LayoutComponents do
       href={~p"/users/log_in"}
       class={[
         "btn btn-link text-base-content"
-      ]}>Log in</.link>
-
-    <.link
-      :if={!@current_user}
-      href={~p"/users/register"}
-      class={[
-        "btn btn-primary"
-      ]}>Register</.link>
+      ]}
+    >
+      Log in
+    </.link>
 
     <.dropdown :if={@current_user} id={"user-menu#{if @mobile, do: "-mobile"}"}>
       <:toggle class="px-2 btn btn-secondary">
         <Heroicons.user_circle solid class="w-8 h-8" />
       </:toggle>
       <:menu align="right">
-        <li><.link href={~p"/users/settings"}>Settings</.link></li>
-        <li><.link href={~p"/accounts"}>Accounts</.link></li>
-        <li><.link href={~p"/users/log_out"} method="delete">Log out</.link></li>
+        <li>
+          <.link href={~p"/users/settings"}>Settings</.link>
+        </li>
+        <li>
+          <.link href={~p"/accounts"}>Accounts</.link>
+        </li>
+        <li>
+          <.link href={~p"/users/log_out"} method="delete">Log out</.link>
+        </li>
       </:menu>
     </.dropdown>
     """
@@ -66,9 +80,17 @@ defmodule UndiWeb.LayoutComponents do
   attr :on_cancel, JS, default: %JS{}
   attr :on_confirm, JS, default: %JS{}
   slot :inner_block, required: true
+
   def drawer(assigns) do
     ~H"""
-    <div id={@id} phx-mounted={@show && show_drawer(@id)} class="relative z-40 lg:hidden" role="dialog" style="display: none" aria-modal="true">
+    <div
+      id={@id}
+      phx-mounted={@show && show_drawer(@id)}
+      class="relative z-40 lg:hidden"
+      role="dialog"
+      style="display: none"
+      aria-modal="true"
+    >
       <div id={"#{@id}-bg"} class="fixed inset-0 bg-neutral-focus bg-opacity-30"></div>
 
       <div class="fixed inset-0 z-40 flex">
@@ -81,7 +103,11 @@ defmodule UndiWeb.LayoutComponents do
           class="relative flex flex-col flex-1 w-full max-w-xs shadow-lg bg-base-100 focus:outline-none"
         >
           <div id={"#{@id}-close"} class="absolute top-0 right-0 pt-4 -mr-12">
-            <button type="button" phx-click={hide_drawer(@on_cancel, @id)} class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-base-100">
+            <button
+              type="button"
+              phx-click={hide_drawer(@on_cancel, @id)}
+              class="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-base-100"
+            >
               <span class="sr-only">Close sidebar</span>
               <Heroicons.x_mark class="w-6 h-6 base-content text-opacity-50" />
             </button>
