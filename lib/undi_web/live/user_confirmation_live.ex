@@ -15,7 +15,6 @@ defmodule UndiWeb.UserConfirmationLive do
     </.simple_form>
 
     <p class="text-center">
-      |
       <.link href={~p"/users/log_in"}>Log in</.link>
     </p>
     """
