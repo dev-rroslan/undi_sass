@@ -5,13 +5,13 @@ defmodule Undi.MixProject do
     [
       app: :undi,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      releases: releases()
+      
 
      ]
   end
@@ -32,27 +32,20 @@ defmodule Undi.MixProject do
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
-  defp releases() do
-    [
-      undi: [
-        include_executables_for: [:unix],
-        cookie: "y9kF2u644cRZCtR0aRWU3DbVYYfiw0sn6E6y_L_3K_qTY8TXezTyow=="
-      ]
-    ]
-  end
+  
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.0"},
+      {:phoenix, "~> 1.7.7"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.9"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 3.3"},
       {:phoenix_live_reload, "~> 1.4", only: :dev},
-      {:phoenix_live_view, "~> 0.18.16"},
+      {:phoenix_live_view, "~> 0.19.5"},
       {:heroicons, "~> 0.5"},
       {:floki, ">= 0.34.0"},
-      {:phoenix_live_dashboard, "~> 0.7.2"},
+      {:phoenix_live_dashboard, "~> 0.8.0"},
       {:esbuild, "~> 0.6", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.1.8", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.9"},
@@ -65,8 +58,8 @@ defmodule Undi.MixProject do
 
       # ADDITIONAL PACKAGES
       {:cachex, "~> 3.6.0"},
-      {:flop, "~> 0.19.0"},
-      {:flop_phoenix, "~> 0.17.2"},
+      {:flop, "~> 0.22.1"},
+      {:flop_phoenix, "~> 0.21.1"},
       {:guardian, "~> 2.3"},
       {:bcrypt_elixir, "~> 3.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
@@ -81,6 +74,7 @@ defmodule Undi.MixProject do
 
     ]
   end
+
 
   # Aliases are shortcuts or tasks specific to the current project.
   # For example, to install project dependencies and perform other setup tasks, run:
