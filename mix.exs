@@ -11,6 +11,7 @@ defmodule Undi.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
+      releases: releases()
 
      ]
   end
@@ -31,7 +32,14 @@ defmodule Undi.MixProject do
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
-  #
+  defp releases() do
+    [
+      undi: [
+        include_executables_for: [:unix],
+        cookie: "y9kF2u644cRZCtR0aRWU3DbVYYfiw0sn6E6y_L_3K_qTY8TXezTyow=="
+      ]
+    ]
+  end
   # Type `mix help deps` for examples and options.
   defp deps do
     [
